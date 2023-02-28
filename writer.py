@@ -11,14 +11,7 @@ def json_load(filePath):
         return json.load(file)
 
 
-'''
-json_dump:写入json文件
-data： 写入的数据
-filePath:文件路径及文件 示例* d:\\vsd\\csv\\123.json
-'''
-def json_dump(filePath, data):
-    with open(filePath, mode='w', newline='', encoding='utf8') as file:
-        json.dump(data, file,ensure_ascii=False)
+
 
 
 

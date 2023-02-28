@@ -1,3 +1,6 @@
+import csv
+import json
+
 from selenium.webdriver.common.by import By
 
 
@@ -102,6 +105,15 @@ class PySelenium:
             for row in data_list_name:
                 writer.writerow(row)
 
+    def json_dump(filePath, data):
+        '''
+        json_dump:写入json文件
+        data： 写入的数据
+        filePath:文件路径及文件 示例* d:\\vsd\\csv\\123.json
+        '''
+        with open(filePath, mode='w', newline='', encoding='utf8') as file:
+            json.dump(data, file, ensure_ascii=False)
+
     # 多元素定位
     def locators(self, locator):
         return self.driver.find_elements(*locator)
@@ -117,3 +129,11 @@ class PySelenium:
     def click_elemet(self, locator):
         ele = self.locator(locator)
         ele.click()
+
+    def Enca_submit(self, to_element):
+        '''
+        <form>表单提交
+        :param to_element: 元素对象ele
+        :return:
+        '''
+        self.locator(to_element).submit()

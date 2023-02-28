@@ -6,10 +6,11 @@ from pySelenium import PySelenium
 
 
 class Run(PySelenium):
-    # ------------------- 验证码处理 -------------------
-    # ----<识别验证码并返回
+    # 验证码保存位置
     Code_Img_Path = './img/codeImg.png'
 
+    # ------------------- 验证码处理 -------------------
+    # ----<识别验证码并返回
     def discern_vfcode(self, Code_Img_Path=Code_Img_Path):
         ocr = ddddocr.DdddOcr()
         code_loc = self.driver.find_element(By.XPATH, './/input[@name="txtVerifyCode"]/following-sibling::img')
@@ -21,26 +22,32 @@ class Run(PySelenium):
 
     # ----<碰到验证码后的处理方式
     def format_vfcode(self):
+
+        # 验证码输入框
         code_input = (By.XPATH, './/div[@role="dialog"]//input[@name="txtVerifyCode"]')
+        # 确认按钮
         code_submit = (By.XPATH, '//*[@id="btnSaveProRes"]')
-        self.locator(code_input).clear()  # 清空
+        # 执行清空
+
         vfcode = self.discern_vfcode()  # 调用截取识别函数
-        self.locator(code_input).send_keys(vfcode)  # 输入验证码
-        self.locator(code_submit).click()  # 点击确定
+        self.locator(code_input).clear()  # 输入验证码之前清空
+        print(vfcode)
+        # self.locator(code_input).send_keys(vfcode)  # 输入验证码
+        # self.Enca_submit(code_submit)  # 点击确定
 
     # ----<验证码识别错误后的处理方式
     def error_vfcode(self):
         pass
 
-    # ------------------- Start解析 -------------------
+    # ------------------- 解析 -------------------
     def get_data(self):
         pass
 
-    # ------------------- Start保存 -------------------
+    # ------------------- 保存 -------------------
     def save_data(self):
         pass
 
-    # ------------------- Start翻页 -------------------
+    # ------------------- 翻页 -------------------
     def turn_pages(self):
         # 总页数
         page_count = int(
@@ -74,7 +81,7 @@ class Run(PySelenium):
 
 
 if __name__ == '__main__':
-    url = 'http://www.chictr.org.cn/searchproj.aspx'
+    url = 'http://d3d3LmNoaWN0ci5vcmcuY24=/searchproj.aspx'
     browser = webdriver.Chrome()
     browser.implicitly_wait(10)
     start = Run(browser)
